@@ -1,0 +1,23 @@
+# 运行时数据：任务记录、素材池、生成结果与日志
+data/
+data-gpu/
+work/
+work-gpu/
+backups/
+
+# 跨入口 GPU 进程锁（运行时生成）
+.gpu-pipeline.lock
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 本地 VPS 部署配置与构建产物：已弃用，不入库
+deploy/
+
+# 验证截图与大体积二进制；JSON 报告保留
+artifacts/**/*.png
+artifacts/**/*.jpg
+artifacts/**/*.jpeg
+artifacts/**/*.gif
+artifacts/**/*.ply

@@ -1,0 +1,50 @@
+{
+  "stats": {
+    "projectId": "1f2a1601-ce80-4862-a5a9-0dfbb7e05879",
+    "projectPath": "/tmp/splat-quality-pipeline-20261002/20261002-021525_images",
+    "finalPly": "/tmp/splat-quality-pipeline-20261002/20261002-021525_images/final.ply",
+    "fileSize": 5793226,
+    "splatCount": 24541,
+    "inputImages": 64,
+    "registeredImages": 43,
+    "registeredRatio": 0.671875,
+    "points3d": 8747,
+    "durationMs": 96257,
+    "completedAt": "2026-10-01T18:17:01.338780826Z",
+    "warning": "注册率 67.2%：低于 80%，将继续训练，但结果质量可能受影响",
+    "logsDirectory": "/tmp/splat-quality-pipeline-20261002/20261002-021525_images/logs"
+  },
+  "training": {
+    "adapterVersion": 1,
+    "gpu": {
+      "status": "detected",
+      "source": "nvidia-smi",
+      "name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "totalMiB": 8151,
+      "freeMiB": 5992
+    },
+    "emergencyRetry": false,
+    "effective": {
+      "total-steps": "1500",
+      "max-resolution": "3200",
+      "max-splats": "600000",
+      "growth-stop-iter": "1150"
+    },
+    "requested": {
+      "total-steps": "30000",
+      "max-resolution": "3200",
+      "max-splats": "200000",
+      "growth-stop-iter": "23000"
+    },
+    "lensDistortionCorrected": true
+  },
+  "reconstructionSummary": {
+    "adapterVersion": 1,
+    "inputImages": 64,
+    "registeredImages": 43,
+    "registeredRatio": 0.671875,
+    "lowFeatureImages": 4,
+    "lowFeatureThreshold": 100,
+    "selectedModel": "1"
+  }
+}

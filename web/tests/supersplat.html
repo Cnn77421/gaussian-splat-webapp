@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>SuperSplat 集成验证</title>
+<link rel="stylesheet" href="/vendor/supersplat/index.css">
+<link rel="stylesheet" href="/legacy-view-controls.css">
+<link rel="stylesheet" href="/viewer-theme.css">
+<link rel="stylesheet" href="/showcase.css">
+<script type="importmap">{"imports":{"three":"/vendor/spark/three.core.js"}}</script>
+<style>
+body { margin: 24px; background: #17202a; color: #e4edf4; font: 14px system-ui; }
+button, input { padding: 8px 14px; }
+#preview { position: relative; width: 720px; height: 440px; max-width: 90vw; }
+.supersplat-slot { position: absolute; inset: 0; }
+.pass { color: #81dab1; } .fail { color: #ff9797; }
+li { margin: 5px 0; }
+#report { white-space: pre-wrap; font: 11px monospace; }
+</style>
+<h1>SuperSplat 集成验证</h1>
+<p>验证真实 PLY 解码、GPU 像素、原版工具栏、取景、模型切换、取消与异常恢复。</p>
+<button id="run">运行验证</button> <strong id="status">等待运行</strong>
+<input id="hostInput" placeholder="键盘隔离验证">
+<ul id="results"></ul>
+<div id="preview"></div>
+<pre id="report"></pre>
+<script type="module" src="/tests/supersplat-check.js"></script>
+</html>

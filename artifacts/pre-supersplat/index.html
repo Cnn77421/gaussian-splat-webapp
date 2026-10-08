@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="view-transition" content="same-origin">
+<title>SplatApp · 3D 高斯泼溅</title>
+<link rel="stylesheet" href="/style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "/vendor/spark/three.module.js",
+    "three/addons/controls/OrbitControls.js": "/vendor/spark/OrbitControls.js",
+    "three/addons/postprocessing/Pass.js": "/vendor/spark/Pass.js",
+    "@sparkjsdev/spark": "/vendor/spark/spark.module.js",
+    "tweakpane": "/vendor/tweakpane/tweakpane.min.js"
+  }
+}
+</script>
+</head>
+<body>
+<header>
+  <h1>3D 高斯泼溅 <span class="sub">SplatApp</span></h1>
+  <div id="health" class="pill">检测后端…</div>
+</header>
+
+<main>
+  <!-- 左侧：任务控制 -->
+  <section class="panel">
+    <div class="block">
+      <h2>1 · 选择素材</h2>
+      <label id="drop" class="drop">
+        <input type="file" id="file" accept="video/*,.zip" hidden>
+        <strong>点击选择，或把文件拖进来</strong>
+        <span>MP4 / MOV 视频，或图片集的 .zip 压缩包</span>
+      </label>
+      <div id="fileInfo" class="fileinfo"></div>
+    </div>
+
+    <div class="block">
+      <h2>或 · 直接看 .ply</h2>
+      <label id="plyDrop" class="drop">
+        <input type="file" id="plyFile" accept=".ply" hidden>
+        <strong>导入本地 .ply 直接预览</strong>
+        <span>纯前端渲染，不上传、不走后端</span>
+      </label>
+      <div id="plyInfo" class="fileinfo"></div>
+    </div>
+
+    <div class="block">
+      <h2>2 · 质量档位</h2>
+      <div class="quals" id="quals">
+        <label><input type="radio" name="q" value="fast" checked><span>快速<em>验证素材与路径</em></span></label>
+        <label><input type="radio" name="q" value="balanced"><span>均衡<em>质量与耗时平衡</em></span></label>
+        <label><input type="radio" name="q" value="high"><span>精细<em>更充分利用细节</em></span></label>
+      </div>
+    </div>
+
+    <button id="go" class="go" disabled>开始生成</button>
+    <p class="hint">本机实测（RTX 5060 Laptop 8 GB）：Fast 档 60 张图片 ≈ 8 分钟，20 秒视频 ≈ 11 分钟。生成期间请关闭浏览器以释放显存。</p>
+  </section>
+
+  <!-- 中间：3D 预览 -->
+  <section class="panel viewer" id="viewerPanel">
+    <div class="viewer-toolbar">
+      <h2>3D 预览 <span class="sub">拖动旋转 · 滚轮缩放</span></h2>
+      <div class="cam-bar">
+        <span class="cam-label">视角</span>
+        <button class="cbtn" data-view="source" title="还原拍摄机位（快捷键 1）">源视角</button>
+        <button class="cbtn" data-view="front" title="点云正面（快捷键 2）">正面</button>
+        <button class="cbtn" data-view="left" title="从左侧看（快捷键 3）">左侧</button>
+        <button class="cbtn" data-view="right" title="从右侧看（快捷键 4）">右侧</button>
+        <button class="cbtn" data-view="top" title="从上方看（快捷键 5）">上方</button>
+        <button class="cbtn" data-view="back" title="从背面看（快捷键 6）">背面</button>
+        <button class="cbtn" id="camSpin" title="自动旋转（快捷键 R）">自动旋转</button>
+        <button class="cbtn" id="camReset" title="回到源视角（快捷键 0）">重置</button>
+        <button class="cbtn" id="camPlaneSave" title="把当前相机倾斜保存为默认视角平面（快捷键 Shift + U）：按 U 显示辅助平面，用 ← / → 对准模型地面后保存">保存默认平面</button>
+        <button class="cbtn" id="camPlaneReset" title="清除本地保存的默认视角平面，回到世界 −Y 朝上">恢复默认平面</button>
+        <button class="cbtn" id="camFull" title="3D 视窗全屏（快捷键 F）：只放大中间视窗，视角、粒子特效和快捷键保持可用；Esc 或再按一次 F 退出">全屏</button>
+        <span class="cam-readout" id="camPlaneState">默认</span>
+        <span class="cam-readout" id="camReadout">--</span>
+      </div>
+      <div class="view-options">
+        <label><input id="camHome" type="checkbox">松手后缓慢回正</label>
+        <label><input id="camParallax" type="checkbox" checked>鼠标视差 / 轻微偏航</label>
+        <span>左键旋转 · 中键单击定位 / 拖动缩放 · 右键平移 · 滚轮缩放 · F 全屏</span>
+      </div>
+      <div class="fx-master">
+        <label><input id="fxEnabled" type="checkbox" role="switch" checked>粒子特效总开关</label>
+        <span id="fxState" aria-live="polite">已开启</span>
+      </div>
+      <details class="fx-panel" open>
+        <summary>粒子形变 <span>独立于视角控制</span></summary>
+        <div id="fxPane" class="fx-pane-theme" aria-label="粒子形变参数"></div>
+        <p id="fxHint" class="fx-hint" aria-live="polite"></p>
+      </details>
+      <details class="keyboard-help">
+        <summary>键盘快捷键 · WASD / U I O P</summary>
+        <p>WASD 平移 · Shift + WASD 旋转 · U 辅助平面 · I 信息面板 · O 正交 / 透视 · P 点云 / 高斯</p>
+        <p>C 鼠标光标 · + / − 粒子大小 · F 全屏 · G 焦距系数 · ← / → 相机倾斜 · Shift + U 保存默认平面 · 0–6 视角 · R 环绕 · X 恢复粒子</p>
+      </details>
+    </div>
+    <div id="viewer" class="canvas-wrap">
+      <button id="fsControls" class="cbtn fs-toggle" hidden>控制</button>
+      <div id="empty" class="empty">生成完成后，模型会在这里实时渲染</div>
+    </div>
+  </section>
+
+  <!-- 右侧：进度 -->
+  <section class="panel">
+    <div class="block">
+      <h2>3 · 进度</h2>
+      <div id="stage" class="stage">等待开始</div>
+      <div class="bar"><div id="fill" class="fill"></div></div>
+      <div class="row"><span id="pct">0%</span><span id="elapsed"></span></div>
+      <div id="msg" class="msg"></div>
+      <pre id="log" class="log"></pre>
+    </div>
+    <div class="block" id="resultBlock" hidden>
+      <h2>4 · 结果</h2>
+      <div id="stats" class="stats"></div>
+      <a id="dl" class="dl" download>下载 final.ply</a>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>场景爆开入场 · GPU 验证</title>
+<style>
+body { margin: 24px; background: #0b0e15; color: #e9e1d3; font: 14px/1.6 system-ui; }
+button { padding: 9px 16px; cursor: pointer; }
+#preview { position: relative; width: min(960px,95vw); height: 540px; overflow: hidden; background: #05070b; border-radius: 18px; }
+#filmstrip { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+figure { margin: 0; } figure img { width: 230px; border-radius: 8px; } figcaption { color: #b6ac9c; }
+.pass { color: #8bdeb3; } .fail { color: #ff9595; }
+</style>
+<script type="importmap">
+{"imports":{"three":"/vendor/spark/three.module.js","three/addons/controls/OrbitControls.js":"/vendor/spark/OrbitControls.js","three/addons/postprocessing/Pass.js":"/vendor/spark/Pass.js","@sparkjsdev/spark":"/vendor/spark/spark.module.js"}}
+</script>
+<h1>中心聚合 → 爆开 → 完整场景</h1>
+<p>读取真实 WebGL 像素，验证形变、精确归位、跳过、重播和资源释放。可用 ?job=任务ID 检查真实场景。</p>
+<button id="run">运行 GPU 验证</button> <strong id="status">等待开始</strong>
+<div id="preview"></div>
+<div id="filmstrip"></div>
+<ul id="results"></ul>
+<script type="module" src="./scene-intro-check.js"></script>
+</html>

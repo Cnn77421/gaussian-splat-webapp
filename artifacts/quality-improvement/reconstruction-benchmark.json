@@ -1,0 +1,53 @@
+{
+  "video": "data/projects/20261001-203731_VID_20261001_172139/source/input.mp4",
+  "frames": 64,
+  "featureSeconds": 4.02,
+  "variants": {
+    "baseline": {
+      "matchSeconds": 18.02,
+      "mapperSeconds": 12.06,
+      "models": [
+        {
+          "model": "0",
+          "registered": 15,
+          "points3d": 5629
+        }
+      ],
+      "best": {
+        "model": "0",
+        "registered": 15,
+        "points3d": 5629
+      },
+      "ratio": 0.234375,
+      "meanReprojectionErrorPx": 0.699058
+    },
+    "guided-overlap20": {
+      "matchSeconds": 31.42,
+      "mapperSeconds": 53.57,
+      "models": [
+        {
+          "model": "0",
+          "registered": 2,
+          "points3d": 928
+        },
+        {
+          "model": "1",
+          "registered": 19,
+          "points3d": 7748
+        },
+        {
+          "model": "2",
+          "registered": 31,
+          "points3d": 7702
+        }
+      ],
+      "best": {
+        "model": "2",
+        "registered": 31,
+        "points3d": 7702
+      },
+      "ratio": 0.484375,
+      "meanReprojectionErrorPx": 1.003152
+    }
+  }
+}

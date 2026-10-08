@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-01",
+  "result": "passed",
+  "checks": [
+    "PASS · 本地 PLY 解码成功",
+    "PASS · WebGL 实际绘制粒子（34447 个亮像素）",
+    "PASS · 局部排斥改变 GPU 画面（22853 个像素）",
+    "PASS · 鼠标吸附改变 GPU 画面（14231 个像素）",
+    "PASS · 流体绕行改变 GPU 画面（20383 个像素）",
+    "PASS · 速度甩动改变 GPU 画面（15422 个像素）",
+    "PASS · 扭曲改变 GPU 画面（28414 个像素）",
+    "PASS · 涡旋改变 GPU 画面（17165 个像素）",
+    "PASS · 呼吸改变 GPU 画面（16380 个像素）",
+    "PASS · 噪声扰动改变 GPU 画面（24164 个像素）",
+    "PASS · 恢复原状后，画面回到基准",
+    "PASS · explosion脉冲改变实际画面",
+    "PASS · explosion脉冲结束后回归原位",
+    "PASS · ripple脉冲改变实际画面",
+    "PASS · ripple脉冲结束后回归原位",
+    "PASS · 鼠标移开后局部排斥平滑回归",
+    "PASS · 强度为零时保持原始模型",
+    "PASS · 无 Shader 编译错误或 WebGL 错误",
+    "PASS · 自动环绕推进视角",
+    "PASS · 缓慢回正可跨越相反视角",
+    "PASS · 画布和相机随容器尺寸更新",
+    "PASS · 释放画布、渲染循环和事件监听",
+    "PASS · 释放时没有异步排序/回读异常",
+    "PASS · 加载尚未完成时取消预览，不留下旧画布",
+    "PASS · 连续切换本地文件时，最新模型可用且只保留一个画布",
+    "PASS · 连续切换模型没有未处理的异步错误",
+    "PASS · 本地 blob PLY 导入成功"
+  ],
+  "realPlySplats": 431359,
+  "realPlyChecks": [
+    "loaded",
+    "drag orbit",
+    "release to home",
+    "wheel zoom",
+    "local PLY replacement"
+  ]
+}

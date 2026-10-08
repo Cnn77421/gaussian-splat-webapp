@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-02",
+  "renderer": "webgl2",
+  "antiAlias": true,
+  "integration": { "passed": 87, "failed": 0 },
+  "movingRender": {
+    "passed": 6, "failed": 0, "screenFrames": 96,
+    "samples": [
+      {"motion": "rotate", "frames": 32, "minLitPixels": 131, "maxLitPixels": 137},
+      {"motion": "pan", "frames": 32, "minLitPixels": 130, "maxLitPixels": 135},
+      {"motion": "zoom", "frames": 32, "minLitPixels": 133, "maxLitPixels": 228}
+    ]
+  },
+  "stationaryCapture": { "captures": 6, "maxChangedPixels": 0 },
+  "production": {
+    "url": "/?job=8badd03c59cf",
+    "status": "可交互",
+    "rendererLog": "Renderer: webgl2",
+    "sha256": "093ccb64b77ac9d43a4cad10c8ec63a71598983c69463e8cc89d0c7068ebb978",
+    "backup": "backups/render-flicker-20261002/supersplat-preview.js"
+  },
+  "limitations": [
+    "The test browser has no WebGPU adapter, so the original device-specific flicker was not reproduced.",
+    "User confirmation on the affected device remains pending.",
+    "CPU sorting can be slower for large models than WebGPU sorting."
+  ]
+}

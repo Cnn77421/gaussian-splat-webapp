@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>飞行相机鼠标验证</title>
+<link rel="stylesheet" href="../vendor/supersplat/index.css">
+<link rel="stylesheet" href="../viewer-theme.css">
+<script type="importmap">{"imports":{"three":"../vendor/spark/three.core.js"}}</script>
+<style>body{background:#111;color:#ddd;font:14px system-ui;padding:20px}#preview{position:relative;width:720px;height:440px}#preview .supersplat-slot{position:absolute;inset:0}.pass{color:#7dca9b}.fail{color:#ff9292}</style>
+<h1>飞行相机鼠标验证</h1><button id="prepare" disabled>重设倾斜测试姿态</button><strong id="status">加载中</strong>
+<p>在画布内向右或向左拖动，然后使用原版重置按钮。</p><ul id="results"></ul><div id="preview"></div>
+<script type="module" src="./fly-camera-check.js"></script></html>

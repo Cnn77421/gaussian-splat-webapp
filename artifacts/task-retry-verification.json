@@ -1,0 +1,12 @@
+{
+  "backendTestsPassed": 61,
+  "frontend": "passed: retry buttons, replacement upload, original quality, duplicate guards, busy backend fallback, stale response protection",
+  "liveBrowser": "failed task retry opens replacement material prompt",
+  "liveBackend": {
+    "port": 8848,
+    "retryEndpointLoaded": false,
+    "compatibilityUploadAvailable": true,
+    "reason": "active job 18f4d0cff725 preserved; no restart"
+  },
+  "inputRetentionActivation": "next service startup"
+}

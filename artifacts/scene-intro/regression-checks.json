@@ -1,0 +1,334 @@
+[
+  {
+    "name": "PASS · 本地 PLY 解码成功",
+    "passed": true
+  },
+  {
+    "name": "PASS · WebGL 实际绘制粒子（34447 个亮像素）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 局部排斥改变 GPU 画面（22853 个像素）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 鼠标吸附改变 GPU 画面（14231 个像素）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 流体绕行改变 GPU 画面（20383 个像素）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 速度甩动改变 GPU 画面（15422 个像素）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 扭曲改变 GPU 画面（28414 个像素）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 涡旋改变 GPU 画面（17165 个像素）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 呼吸改变 GPU 画面（16380 个像素）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 噪声扰动改变 GPU 画面（24164 个像素）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 恢复原状后，画面回到基准",
+    "passed": true
+  },
+  {
+    "name": "PASS · explosion脉冲改变实际画面",
+    "passed": true
+  },
+  {
+    "name": "PASS · explosion脉冲结束后回归原位",
+    "passed": true
+  },
+  {
+    "name": "PASS · ripple脉冲改变实际画面",
+    "passed": true
+  },
+  {
+    "name": "PASS · ripple脉冲结束后回归原位",
+    "passed": true
+  },
+  {
+    "name": "PASS · 鼠标移开后局部排斥平滑回归",
+    "passed": true
+  },
+  {
+    "name": "PASS · 强度为零时保持原始模型",
+    "passed": true
+  },
+  {
+    "name": "PASS · 特效总开关关闭后，扭曲、微动和脉冲全部回到原始 GPU 画面",
+    "passed": true
+  },
+  {
+    "name": "PASS · 关闭时点击、鼠标和时间更新不会重新激活特效",
+    "passed": true
+  },
+  {
+    "name": "PASS · 开启总开关后恢复先前模式及微动参数",
+    "passed": true
+  },
+  {
+    "name": "PASS · 无 Shader 编译错误或 WebGL 错误",
+    "passed": true
+  },
+  {
+    "name": "PASS · 自动环绕推进视角",
+    "passed": true
+  },
+  {
+    "name": "PASS · 缓慢回正可跨越相反视角",
+    "passed": true
+  },
+  {
+    "name": "PASS · 画布和相机随容器尺寸更新",
+    "passed": true
+  },
+  {
+    "name": "PASS · 释放画布、渲染循环和事件监听",
+    "passed": true
+  },
+  {
+    "name": "PASS · 释放时没有异步排序/回读异常",
+    "passed": true
+  },
+  {
+    "name": "PASS · 加载尚未完成时取消预览，不留下旧画布",
+    "passed": true
+  },
+  {
+    "name": "PASS · setViewPlane 同步相机 up 与 OrbitControls 轨道基准",
+    "passed": true
+  },
+  {
+    "name": "PASS · resetViewPlane 回到世界 −Y 朝上",
+    "passed": true
+  },
+  {
+    "name": "PASS · 连续切换本地文件时，最新模型可用且只保留一个画布",
+    "passed": true
+  },
+  {
+    "name": "PASS · 页面总开关禁用特效控件并保留模式，相机控件仍可用",
+    "passed": true
+  },
+  {
+    "name": "PASS · 页面总开关重新开启恢复已选模式",
+    "passed": true
+  },
+  {
+    "name": "PASS · 中键操作阻止浏览器自动滚屏",
+    "passed": true
+  },
+  {
+    "name": "PASS · 中键上下拖动推进/拉远透视相机",
+    "passed": true
+  },
+  {
+    "name": "PASS · 右键拖动平移画面",
+    "passed": true
+  },
+  {
+    "name": "PASS · W 键平移相机",
+    "passed": true
+  },
+  {
+    "name": "PASS · A 键平移相机",
+    "passed": true
+  },
+  {
+    "name": "PASS · S 键平移相机",
+    "passed": true
+  },
+  {
+    "name": "PASS · D 键平移相机",
+    "passed": true
+  },
+  {
+    "name": "PASS · Shift + WASD 复用 OrbitControls 旋转",
+    "passed": true
+  },
+  {
+    "name": "PASS · U 显示辅助平面",
+    "passed": true
+  },
+  {
+    "name": "PASS · U 辅助平面跟随环绕中心和相机朝上方向",
+    "passed": true
+  },
+  {
+    "name": "PASS · 按住切换键不会反复闪烁",
+    "passed": true
+  },
+  {
+    "name": "PASS · U 再次隐藏辅助平面",
+    "passed": true
+  },
+  {
+    "name": "PASS · I 显示实际粒子数和相机信息",
+    "passed": true
+  },
+  {
+    "name": "PASS · I 面板恢复相机、光标、渲染数量、排序任务和画布信息",
+    "passed": true
+  },
+  {
+    "name": "PASS · O 切换正交相机并同步控制器、渲染相机",
+    "passed": true
+  },
+  {
+    "name": "PASS · 正交模式中键拖动仍可缩放",
+    "passed": true
+  },
+  {
+    "name": "PASS · 正交模式下 WASD 仍可平移",
+    "passed": true
+  },
+  {
+    "name": "PASS · O 恢复透视相机",
+    "passed": true
+  },
+  {
+    "name": "PASS · P 点云模式改变实际 GPU 画面",
+    "passed": true
+  },
+  {
+    "name": "PASS · P 再次恢复高斯画面",
+    "passed": true
+  },
+  {
+    "name": "PASS · + 增大粒子并改变画面",
+    "passed": true
+  },
+  {
+    "name": "PASS · − 恢复粒子大小",
+    "passed": true
+  },
+  {
+    "name": "PASS · G 增大焦距系数",
+    "passed": true
+  },
+  {
+    "name": "PASS · F 由网页层接管为全屏，不再改变焦距系数",
+    "passed": true
+  },
+  {
+    "name": "PASS · 全屏状态与按钮、浮层开关同步",
+    "passed": true
+  },
+  {
+    "name": "PASS · 本次点击未被浏览器授予全屏激活，按钮仍可用且画布未受影响",
+    "passed": true
+  },
+  {
+    "name": "PASS · C 开启鼠标光标",
+    "passed": true
+  },
+  {
+    "name": "PASS · C 关闭鼠标光标",
+    "passed": true
+  },
+  {
+    "name": "PASS · 左方向键倾斜相机",
+    "passed": true
+  },
+  {
+    "name": "PASS · 右方向键恢复相机倾斜",
+    "passed": true
+  },
+  {
+    "name": "PASS · 源视角重置正确刷新相机 up",
+    "passed": true
+  },
+  {
+    "name": "PASS · 输入框、富文本及浏览器组合键不被模型快捷键截获",
+    "passed": true
+  },
+  {
+    "name": "PASS · 操作复选框后，WASD 仍然生效",
+    "passed": true
+  },
+  {
+    "name": "PASS · 滑杆仍保留方向键调节，不触发相机倾斜",
+    "passed": true
+  },
+  {
+    "name": "PASS · 模型视窗内 Ctrl + WASD 恢复旧版旋转操作",
+    "passed": true
+  },
+  {
+    "name": "PASS · 中键单击真实点云，平滑改变旋转中心并保持相机位置",
+    "passed": true
+  },
+  {
+    "name": "PASS · 定位显示标记和坐标，不触发粒子爆散或波纹",
+    "passed": true
+  },
+  {
+    "name": "PASS · 中键拖动只缩放，不误触定位",
+    "passed": true
+  },
+  {
+    "name": "PASS · 点击空白不把悬停平面当作模型定位点",
+    "passed": true
+  },
+  {
+    "name": "PASS · 粒子总开关关闭时，中键定位仍然可用",
+    "passed": true
+  },
+  {
+    "name": "PASS · 正交模式下中键单击也能定位真实高斯点",
+    "passed": true
+  },
+  {
+    "name": "PASS · 新键盘操作取消定位过渡，避免抢夺相机控制",
+    "passed": true
+  },
+  {
+    "name": "PASS · 未保存默认平面时状态为默认、恢复按钮禁用且相机朝世界 −Y",
+    "passed": true
+  },
+  {
+    "name": "PASS · Shift + U 保存当前倾斜到 localStorage，且不切换辅助平面显示",
+    "passed": true
+  },
+  {
+    "name": "PASS · 切换预设视角后仍套用已保存的默认视角平面",
+    "passed": true
+  },
+  {
+    "name": "PASS · U 辅助平面对齐已保存的视角平面",
+    "passed": true
+  },
+  {
+    "name": "PASS · 释放模型后键盘监听和信息面板被清理",
+    "passed": true
+  },
+  {
+    "name": "PASS · 连续切换模型没有未处理的异步错误",
+    "passed": true
+  },
+  {
+    "name": "PASS · 刷新页面后仍读取已保存的默认视角平面",
+    "passed": true
+  },
+  {
+    "name": "PASS · 恢复默认平面清除本地保存并回到世界 −Y 朝上",
+    "passed": true
+  },
+  {
+    "name": "PASS · 本地 blob PLY 导入成功",
+    "passed": true
+  }
+]

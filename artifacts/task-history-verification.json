@@ -1,0 +1,12 @@
+{
+  "backendTestsPassed": 54,
+  "frontendRegression": "passed: all statuses, identical filenames, keyed selection, monotonic progress, serial polling, stale same-job responses",
+  "browser": {
+    "taskCount": 13,
+    "selectedJob": "e232da930bde",
+    "percent": "96.1%",
+    "message": "错误：服务停止，任务已中断",
+    "consoleErrors": []
+  },
+  "serviceRestored": 8848
+}

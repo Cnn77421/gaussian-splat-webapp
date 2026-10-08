@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>SplatApp · 参数与质量提示回归</title>
+<body>
+<h1>参数与质量提示回归（无 WebGL）</h1>
+<p id="status">运行中…</p>
+<ul id="results"></ul>
+<div id="pane"></div>
+<div id="message"></div>
+<div id="stats"></div>
+<a id="download"></a>
+<div id="resultBlock" hidden></div>
+<script type="module">
+import { Pane } from '../vendor/tweakpane/tweakpane.min.js';
+
+const results = document.getElementById('results');
+const checks = [];
+function check(ok, name) {
+  checks.push({ name, passed: !!ok });
+  const item = document.createElement('li');
+  item.textContent = `${ok ? 'PASS' : 'FAIL'} · ${name}`;
+  results.append(item);
+}
+try {
+  const response = await fetch('../app.js', { cache: 'no-store' });
+  if (!response.ok) throw new Error(`app.js: HTTP ${response.status}`);
+  const source = await response.text();
+  // Exercise the production handlers with real Tweakpane DOM events.
+  // Only GPU setters and model loading are substituted; no WebGL context is created.
+  function productionFunction(name) {
+    const start = source.indexOf(`function ${name}(`);
+    const end = source.indexOf('\n}\n', start);
+    if (start < 0 || end < 0) throw new Error(`找不到 ${name}`);
+    return source.slice(start, end + 3);
+  }
+  const el = {
+    fxPane: document.getElementById('pane'),
+    fxEnabled: { checked: true }, fxState: {}, fxHint: {},
+    camHome: { checked: false }, camParallax: { checked: true },
+    msg: document.getElementById('message'), stats: document.getElementById('stats'),
+    dl: document.getElementById('download'), resultBlock: document.getElementById('resultBlock'),
+  };
+  const state = { mode: '1', strength: .65, radius: .28, ambient: false };
+  const gpu = { mode: 1, strength: .65, radius: .28, ambient: false, enabled: true };
+  const viewer = { effects: {
+    setMode(value) { gpu.mode = Number(value); },
+    setStrength(value) { gpu.strength = value; },
+    setRadius(value) { gpu.radius = value; },
+    setAmbient(value) { gpu.ambient = value; },
+    setEnabled(value) { gpu.enabled = value; },
+  } };
+  const setup = new Function('Pane', 'el', 'FX_DEFAULTS', 'viewer', `
+    let pane;
+    const FX_HINTS = { 1: '局部排斥', 5: '扭曲' };
+    const FX_MODES = [{ text: '局部排斥', value: '1' }, { text: '扭曲', value: '5' }];
+    const FX_DISABLED_HINT = '关闭';
+    function resetFxControls() {}
+    ${productionFunction('updateFxHint')}
+    ${productionFunction('syncEffects')}
+    ${productionFunction('buildFxPane')}
+    buildFxPane();
+    return pane;
+  `);
+  const pane = setup(Pane, el, state, viewer);
+  const select = el.fxPane.querySelector('select');
+  select.selectedIndex = 1;
+  select.dispatchEvent(new Event('change', { bubbles: true }));
+  check(state.mode === '5' && gpu.mode === 5, '切换模式立即同步，不切总开关');
+  check(el.fxHint.textContent === '扭曲', '模式说明立即同步');
+
+  function input(label) {
+    const row = [...el.fxPane.querySelectorAll('.tp-lblv')]
+      .find(row => row.querySelector('.tp-lblv_l')?.textContent === label);
+    if (!row) throw new Error(`找不到 ${label} 控件`);
+    return row.querySelector('input');
+  }
+  for (const [label, key, value] of [['强度', 'strength', 1.2], ['范围', 'radius', .5]]) {
+    const field = input(label);
+    field.value = String(value);
+    field.dispatchEvent(new Event('change', { bubbles: true }));
+    check(state[key] === value && gpu[key] === value, `${label}立即同步，不切总开关`);
+  }
+  input('叠加微动').click();
+  check(state.ambient === true && gpu.ambient === true, '微动立即同步，不切总开关');
+  pane.dispose();
+
+  let loaded = null;
+  const show = new Function('el', 'loadPreview', `${productionFunction('showResult')}; return showResult;`)
+    (el, id => { loaded = id; });
+  const warning = '注册率 27.0%：低于 80%，将继续训练，但结果质量可能受影响';
+  show({ id: 'low-quality', message: '全部处理完成', stats: { warning, inputImages: 571, registeredImages: 154 } });
+  check(el.msg.textContent.includes(warning) && el.msg.style.color === 'var(--warn)', '完成结果显示引擎质量警告');
+  check(loaded === 'low-quality' && !el.resultBlock.hidden && el.dl.getAttribute('href').includes('low-quality'),
+    '有质量警告的成功模型仍可预览和下载');
+  show({ id: 'good-quality', message: '全部处理完成', stats: {} });
+  check(el.msg.textContent === '全部处理完成' && el.msg.style.color === '', '切换正常结果后清除旧质量警告');
+} catch (error) {
+  check(false, error.stack || String(error));
+}
+document.getElementById('status').textContent = checks.every(c => c.passed)
+  ? `全部通过（${checks.length} 项）` : '验证失败';
+window.reviewFixResults = checks;
+</script>
+</body>
+</html>

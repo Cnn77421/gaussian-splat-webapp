@@ -1,0 +1,66 @@
+[
+  {
+    "name": "PASS · 原场景 GPU 实际绘制（44421 个高斯）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 等待点击，锁定相机手势",
+    "passed": true
+  },
+  {
+    "name": "PASS · 原场景粒子聚合成紧凑光团（亮像素 2851 / 499720）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 等待点击时，光核流动、闪烁和轨道粒子持续改变 GPU 画面",
+    "passed": true
+  },
+  {
+    "name": "PASS · 点击立即启动，重复触发不重置进度",
+    "passed": true
+  },
+  {
+    "name": "PASS · 爆开瞬间仅渲染相机轻微后退，基础机位保持不变",
+    "passed": true
+  },
+  {
+    "name": "PASS · GPU 中间态确实展开，未直接切换模型",
+    "passed": true
+  },
+  {
+    "name": "PASS · 展开完成后恢复相机操作",
+    "passed": true
+  },
+  {
+    "name": "PASS · 动画结束精确回到原场景 GPU 画面",
+    "passed": true
+  },
+  {
+    "name": "PASS · 基础机位无累计漂移",
+    "passed": true
+  },
+  {
+    "name": "PASS · 播放中可跳过，并准确恢复原场景",
+    "passed": true
+  },
+  {
+    "name": "PASS · 重播结束恢复之前的自动旋转设置",
+    "passed": true
+  },
+  {
+    "name": "PASS · 平移或定位后重播，将光团置中并保留观看方向和距离",
+    "passed": true
+  },
+  {
+    "name": "PASS · 无 Shader / WebGL / 未处理异步错误（GL=0, 无异步错误）",
+    "passed": true
+  },
+  {
+    "name": "PASS · 等待点击时切换模型，清理画布和入场控件",
+    "passed": true
+  },
+  {
+    "name": "PASS · 系统减少动态效果时直接展示场景，并隐藏动画入口",
+    "passed": true
+  }
+]

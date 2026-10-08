@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>SplatApp 粒子交互验证</title>
+<style>
+body { margin: 24px; color: #dce7f6; background: #0d0f14; font: 14px system-ui; }
+button { padding: 10px 20px; cursor: pointer; }
+#preview { width: 720px; height: 440px; max-width: 95vw; }
+li { margin: 6px 0; } .pass { color: #70dca3; } .fail { color: #ff7d7d; }
+</style>
+<script type="importmap">
+{"imports":{"three":"/vendor/spark/three.module.js","three/addons/controls/OrbitControls.js":"/vendor/spark/OrbitControls.js","three/addons/postprocessing/Pass.js":"/vendor/spark/Pass.js","@sparkjsdev/spark":"/vendor/spark/spark.module.js"}}
+</script>
+<h1>粒子交互验证</h1>
+<p>使用本地生成的 4,800 个高斯粒子，验证 GPU 实际画面、形变回归和视角控制。</p>
+<button id="run">运行验证</button>
+<strong id="status">等待运行</strong>
+<ul id="results"></ul>
+<div id="preview"></div>
+<script type="module" src="./effects-check.js"></script>
+</html>

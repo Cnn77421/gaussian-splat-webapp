@@ -1,0 +1,25 @@
+{
+  "services": [
+    {
+      "port": 8848,
+      "queue": {
+        "maxConcurrent": 1,
+        "waiting": 0,
+        "running": 0
+      },
+      "jobs": 12,
+      "gpuRequested": false
+    },
+    {
+      "port": 8850,
+      "queue": {
+        "maxConcurrent": 1,
+        "waiting": 0,
+        "running": 0
+      },
+      "jobs": 2,
+      "gpuRequested": true
+    }
+  ],
+  "existingModelsUnchanged": 12
+}

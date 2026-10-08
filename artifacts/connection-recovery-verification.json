@@ -1,0 +1,19 @@
+{
+  "cause": "both local backends stopped; connection refused",
+  "services": {
+    "8848": "splat-app-web.service active; Restart=on-failure",
+    "8850": "splat-app-gpu.service active; Restart=on-failure"
+  },
+  "browser": {
+    "job": "c7fcf1cb899c",
+    "health": "后端就绪",
+    "stage": "相机重建",
+    "progressSamples": [
+      "47.54%",
+      "48.73%"
+    ],
+    "consoleErrors": []
+  },
+  "regressions": "passed: disconnect retains progress, automatic reconnect, timeout releases pending request, existing retry/queue/selection checks",
+  "launcher": "start-service.sh detects and reuses existing services"
+}

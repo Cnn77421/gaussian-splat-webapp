@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="view-transition" content="same-origin">
+<title>SplatApp · 3D 高斯泼溅</title>
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/vendor/supersplat/index.css">
+<link rel="stylesheet" href="/preview-layout.css">
+<link rel="stylesheet" href="/legacy-view-controls.css">
+<link rel="stylesheet" href="/viewer-theme.css">
+<link rel="stylesheet" href="/showcase.css">
+<script type="importmap">{"imports":{"three":"/vendor/spark/three.core.js"}}</script>
+</head>
+<body>
+<header>
+  <h1>3D 高斯泼溅 <span class="sub">SplatApp</span></h1>
+  <div class="header-actions">
+    <button id="tasksOpen" class="cbtn">生成任务</button>
+    <button id="presentation" class="cbtn" aria-pressed="false">进入展示模式</button>
+    <div id="health" class="pill">检测后端…</div>
+  </div>
+</header>
+
+<main>
+  <!-- 左侧：任务控制 -->
+  <section class="panel task-panel">
+    <div class="block">
+      <div class="task-history-heading"><h2>生成任务</h2><span id="taskCount">读取中…</span></div>
+      <div id="taskHistory" class="task-history" tabindex="-1" aria-label="生成任务列表"><p data-task-empty>正在读取任务…</p></div>
+      <p class="hint">点击任务查看进度、日志或已生成的模型。</p>
+    </div>
+    <div class="block">
+      <h2>1 · 选择素材</h2>
+      <div id="drop" class="drop" role="button" tabindex="0" aria-label="选择视频或图片压缩包">
+        <input type="file" id="file" accept="video/*,.zip" hidden>
+        <strong>点击选择，或把文件拖进来</strong>
+        <span>MP4 / MOV 视频，或图片集的 .zip 压缩包</span>
+      </div>
+      <div id="fileInfo" class="fileinfo"></div>
+    </div>
+
+    <div class="block">
+      <h2>或 · 直接看 .ply</h2>
+      <div id="plyDrop" class="drop" role="button" tabindex="0" aria-label="选择本地 PLY 模型">
+        <input type="file" id="plyFile" accept=".ply" hidden>
+        <strong>导入本地 .ply 直接预览</strong>
+        <span>纯前端渲染，不上传、不走后端</span>
+      </div>
+      <div id="plyInfo" class="fileinfo"></div>
+    </div>
+
+    <div class="block">
+      <h2>2 · 质量档位</h2>
+      <div class="quals" id="quals">
+        <label><input type="radio" name="q" value="fast" checked><span>快速<em>验证素材与路径</em></span></label>
+        <label><input type="radio" name="q" value="balanced"><span>均衡<em>质量与耗时平衡</em></span></label>
+        <label><input type="radio" name="q" value="high"><span>精细<em>更充分利用细节</em></span></label>
+      </div>
+    </div>
+
+    <button id="go" class="go" disabled>开始生成</button>
+    <p class="hint">本机实测（RTX 5060 Laptop 8 GB）：Fast 档 60 张图片 ≈ 8 分钟，20 秒视频 ≈ 11 分钟。</p>
+  </section>
+
+  <!-- 原版 SuperSplat Viewer 自带完整工具栏与交互提示 -->
+  <section class="panel viewer" id="viewerPanel">
+    <div class="preview-heading">
+      <div class="preview-title">
+        <h2>3D 预览</h2>
+        <span id="modelName">等待导入模型</span>
+      </div>
+      <span id="previewStatus" class="preview-status" role="status">未加载</span>
+    </div>
+    <div id="viewer" class="canvas-wrap">
+      <div id="empty" class="empty">导入 PLY 或选择已有作品，即可开始预览</div>
+    </div>
+    <div class="preview-footer">
+      <button id="galleryOpen" class="cbtn">作品库</button>
+      <div class="preview-actions">
+        <button id="saveView" class="cbtn" disabled>保存默认视角</button>
+        <button id="restoreView" class="cbtn" disabled>恢复默认视角</button>
+        <button id="previewImport" class="cbtn">导入 PLY</button>
+        <a id="previewDownload" class="cbtn" hidden download>下载模型</a>
+      </div>
+    </div>
+    <output id="viewMessage" class="view-message" aria-live="polite"></output>
+  </section>
+
+  <!-- 右侧：进度 -->
+  <section class="panel progress-panel">
+    <div class="block">
+      <h2>3 · 进度</h2>
+      <div id="stage" class="stage">等待开始</div>
+      <div class="bar"><div id="fill" class="fill"></div></div>
+      <div class="row"><span id="pct">0%</span><span id="elapsed"></span></div>
+      <div id="msg" class="msg"></div>
+      <button id="retryTask" class="cbtn" hidden>重试此任务</button>
+      <div id="retryPrompt" class="retry-prompt" hidden>
+        <p id="retryMessage"></p>
+        <button id="retryChoose" class="cbtn">选择原素材并重试</button>
+        <button id="retryCancel" class="cbtn">取消</button>
+        <input id="retryFile" type="file" accept="video/*,.zip,image/*" hidden>
+      </div>
+      <pre id="log" class="log"></pre>
+    </div>
+    <div class="block" id="resultBlock" hidden>
+      <h2>4 · 结果</h2>
+      <div id="stats" class="stats"></div>
+      <a id="dl" class="dl" download>下载 final.ply</a>
+    </div>
+  </section>
+</main>
+
+<dialog id="gallery" class="work-gallery" aria-labelledby="galleryTitle">
+  <div class="gallery-heading"><div><h2 id="galleryTitle">我的作品</h2><p>选择一张卡片，进入模型展示</p></div><div class="gallery-header-actions"><button class="cbtn" data-add>＋ 添加作品</button><button class="cbtn" data-close aria-label="关闭作品库">关闭</button></div></div>
+  <input type="file" data-add-file accept=".ply" multiple hidden>
+  <p class="gallery-storage-note">添加本地 PLY，保存在此浏览器中；支持一次添加多个文件。</p>
+  <output class="gallery-message" data-message role="status" aria-live="polite"></output>
+  <section class="gallery-delete-confirmation" data-delete-confirmation hidden aria-label="删除作品确认">
+    <p>确定删除 <strong data-delete-name></strong>？</p><p data-delete-description></p>
+    <div><button class="cbtn" data-cancel-delete>取消</button><button class="cbtn danger" data-confirm-delete>确认删除</button></div>
+  </section>
+  <input class="gallery-search" data-search type="search" placeholder="搜索作品名称" aria-label="搜索作品">
+  <div class="work-grid" data-grid></div><p class="gallery-empty" data-empty>正在读取作品…</p>
+</dialog>
+<script type="module" src="/app.js"></script>
+</body>
+</html>

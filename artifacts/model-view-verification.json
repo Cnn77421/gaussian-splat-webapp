@@ -1,0 +1,13 @@
+{
+  "pythonPassed": 35,
+  "pythonTotal": 35,
+  "httpUnavailable": 18,
+  "httpReason": "Sandbox forbids sockets; escalation auto-review timed out",
+  "gpuStatus": "Not run: browser auto-review timed out twice",
+  "nodeSuites": [
+    "test_model_view.cjs",
+    "test_plane_anchor.cjs",
+    "test_queue_ui.cjs"
+  ],
+  "realTrainingDataset": "Source pose read from pipeline smoke actual COLMAP training cameras; positions confirmed in PLY coordinates"
+}

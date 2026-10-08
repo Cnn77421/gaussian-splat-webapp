@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>作品库添加删除验证</title>
+<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/vendor/supersplat/index.css"><link rel="stylesheet" href="/preview-layout.css"><link rel="stylesheet" href="/legacy-view-controls.css"><link rel="stylesheet" href="/viewer-theme.css"><link rel="stylesheet" href="/showcase.css">
+<script type="importmap">{"imports":{"three":"/vendor/spark/three.core.js"}}</script>
+<style>body{display:block;height:auto;padding:20px}#results{font:14px system-ui}#report{white-space:pre-wrap}.pass{color:#40866a}.fail{color:#ad4454}#preview{position:relative;width:480px;height:300px;max-width:90vw} .supersplat-slot{position:absolute;inset:0}</style>
+<h1>作品库添加删除验证</h1><p>使用独立测试存储与合成 PLY，不修改实际作品。</p><button id="run" class="cbtn">运行作品库验证</button> <strong id="status">等待运行</strong><button id="galleryOpen" class="cbtn">测试作品库</button><ul id="results"></ul><div id="preview"></div><pre id="report"></pre>
+<dialog id="gallery" class="work-gallery" aria-labelledby="galleryTitle">
+  <div class="gallery-heading"><div><h2 id="galleryTitle">我的作品</h2><p>选择一张卡片，进入模型展示</p></div><div class="gallery-header-actions"><button class="cbtn" data-add>＋ 添加作品</button><button class="cbtn" data-close aria-label="关闭作品库">关闭</button></div></div>
+  <input type="file" data-add-file accept=".ply" multiple hidden>
+  <p class="gallery-storage-note">添加本地 PLY，保存在此浏览器中；支持一次添加多个文件。</p>
+  <output class="gallery-message" data-message role="status" aria-live="polite"></output>
+  <section class="gallery-delete-confirmation" data-delete-confirmation hidden aria-label="删除作品确认">
+    <p>确定删除 <strong data-delete-name></strong>？</p><p data-delete-description></p>
+    <div><button class="cbtn" data-cancel-delete>取消</button><button class="cbtn danger" data-confirm-delete>确认删除</button></div>
+  </section>
+  <input class="gallery-search" data-search type="search" placeholder="搜索作品名称" aria-label="搜索作品">
+  <div class="work-grid" data-grid></div><p class="gallery-empty" data-empty>正在读取作品…</p>
+</dialog>
+<script type="module" src="/tests/library-check.js"></script></html>
