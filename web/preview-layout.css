@@ -8,12 +8,12 @@ main { grid-template-columns: 250px minmax(0, 1fr) 270px; }
 .preview-title h2 { margin: 0; flex-shrink: 0; }
 #modelName { font-size: 12px; color: var(--text-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .preview-status { font-size: 11px; color: var(--text-3); flex-shrink: 0; }
-.canvas-wrap { min-height: 260px; border-width: 3px; }
+.canvas-wrap { min-height: 260px; }
 .supersplat-slot { position: absolute; inset: 0; }
 .empty { z-index: 2; pointer-events: none; background: #11161c; }
 .preview-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 10px; flex-shrink: 0; }
 .work-picker { display: flex; align-items: center; gap: 8px; color: var(--text-3); font-size: 12px; min-width: 0; }
-.work-picker select { min-width: 0; max-width: 320px; padding: 6px 9px; color: var(--text-2); border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font: inherit; }
+.work-picker select { min-width: 0; max-width: 320px; height: 2rem; padding: 0 10px; color: var(--ui-foreground); border: 1px solid var(--ui-input); border-radius: var(--ui-radius-md); background: var(--ui-card); font: inherit; }
 .preview-actions { display: flex; gap: 8px; flex-shrink: 0; }
 .preview-actions a { text-decoration: none; }
 body.presentation-mode main { grid-template-columns: minmax(0, 1fr); }
@@ -30,8 +30,6 @@ body.presentation-mode .panel.viewer { height: auto; min-height: 0; order: 0; }
   h1 { font-size: 17px; }
   h1::before { width: 24px; }
   .header-actions { gap: 6px; }
-  .header-actions .cbtn { font-size: 11px; padding: 3px 8px; }
-  .pill { font-size: 10px; padding: 3px 8px; }
   main { grid-template-columns: minmax(0, 1fr); }
   .preview-footer { flex-wrap: wrap; }
   .work-picker { flex: 1; }

@@ -1,24 +1,26 @@
-/* Host theme over the pinned viewer CSS. Keep the rendering and vendor intact. */
+/* Host theme over the pinned viewer CSS. Keep the rendering and vendor intact.
+   组件外观与 web/style.css 的组件层一致（圆角刻度、边框、焦点环取自
+   vendor/shadcn/theme.css 的 --ui-* token）。 */
 .sse-viewer {
   --sse-text: var(--text-2, #5a4b49);
   --sse-text-light: var(--text-1, #63402f);
   --sse-text-dark: var(--text-3, #8b786a);
   --sse-text-darkest: var(--text-3, #8b786a);
-  --sse-accent: var(--accent, #9178b0);
+  --sse-accent: var(--ui-primary, #9178b0);
   --sse-grip: var(--gold, #e5bc60);
-  --sse-bkg: var(--surface, #fffaf0);
-  --sse-bkg-dark: var(--surface-2, #f3ead9);
-  --sse-bkg-darkest: var(--bg, #fff8e7);
-  --sse-bkg-light: var(--lavender, #e9def0);
-  --viewer-border: var(--border, #d6c6ad);
+  --sse-bkg: var(--ui-card, #fffaf0);
+  --sse-bkg-dark: var(--ui-muted, #f3ead9);
+  --sse-bkg-darkest: var(--ui-background, #fff8e7);
+  --sse-bkg-light: var(--ui-accent, #e9def0);
+  --viewer-border: var(--ui-border, #d6c6ad);
   --viewer-paper: #fffaf0f5;
-  --viewer-lavender: var(--lavender, #e9def0);
+  --viewer-lavender: var(--ui-accent, #e9def0);
   --viewer-font: var(--font-sans, 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif);
   font-family: var(--viewer-font);
 }
 .sse-viewer button, .sse-viewer input { font-family: inherit; }
 .sse-viewer button:focus-visible, .sse-viewer summary:focus-visible, .sse-viewer input:focus-visible {
-  outline: 2px solid var(--sse-accent); outline-offset: 3px;
+  outline: 2px solid var(--ui-ring, #9178b0); outline-offset: 3px;
 }
 .sse-viewer .sse-controlsHint,
 .sse-viewer .sse-settingsPanel,
@@ -27,8 +29,8 @@
 .sse-viewer .sse-tooltip,
 .sse-viewer .sse-loadingWrap {
   color: var(--sse-text); background: var(--viewer-paper);
-  border: 2px solid var(--viewer-border); border-radius: 18px 12px 17px 13px;
-  box-shadow: var(--shadow, 0 3px 14px #63402f20);
+  border: 1px solid var(--viewer-border); border-radius: var(--ui-radius-xl, 14px);
+  box-shadow: var(--ui-shadow-sm, 0 1px 3px #63402f1f);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
 }
 .sse-viewer .sse-controlsHint > .sse-controlsHintHeader > .sse-controlsHintTitles > .sse-controlsHintTitle {
@@ -38,7 +40,7 @@
 .sse-viewer .sse-settingsPanel > .sse-settingsGroup:not(:last-child) { border-color: var(--viewer-border); }
 .sse-viewer .sse-controlsHint > .sse-controlsHintRows > .sse-divider { background: var(--viewer-border); }
 .sse-viewer .sse-key, .sse-viewer .sse-controlsHint .sse-gesture {
-  border-color: var(--viewer-border); background: var(--sse-bkg-dark); color: var(--sse-text-light); border-radius: 6px;
+  border-color: var(--viewer-border); background: var(--sse-bkg-dark); color: var(--sse-text-light); border-radius: var(--ui-radius-sm, 6px);
 }
 .sse-viewer .sse-controlsHint .sse-mouse > .sse-mouseIcon > .sse-mouseBody,
 .sse-viewer .sse-controlsHint .sse-mouse > .sse-mouseIcon > .sse-mouseSplit { stroke: var(--sse-text-dark); }
@@ -47,17 +49,17 @@
 .sse-viewer .sse-controlsWrap > .sse-buttonsContainer { flex-wrap: wrap; align-items: flex-end; gap: 8px; }
 .sse-viewer .sse-controlsWrap > .sse-buttonsContainer .sse-buttonGroup {
   gap: 3px; padding: 4px; max-width: 100%; flex-wrap: wrap;
-  border: 2px solid var(--viewer-border); border-radius: 18px 12px 17px 13px;
-  background: var(--viewer-paper); box-shadow: var(--shadow, 0 3px 14px #63402f20);
+  border: 1px solid var(--viewer-border); border-radius: var(--ui-radius-xl, 14px);
+  background: var(--viewer-paper); box-shadow: var(--ui-shadow-sm, 0 1px 3px #63402f1f);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
 }
 .sse-viewer .sse-controlsWrap > .sse-buttonsContainer .sse-controlButton {
-  border-radius: 999px; transition: background-color .15s, color .15s;
+  border-radius: var(--ui-radius-md, 8px); transition: background-color .15s cubic-bezier(.4, 0, .2, 1), color .15s cubic-bezier(.4, 0, .2, 1);
 }
 .sse-viewer .sse-controlsWrap > .sse-buttonsContainer .sse-controlButton:hover { background: var(--viewer-lavender); }
 .sse-viewer .sse-controlsWrap > .sse-buttonsContainer .sse-controlButton > svg > g.sse-stroke { opacity: 0; }
 .sse-viewer .sse-controlsWrap > .sse-buttonsContainer .sse-controlButton.sse-toggle { background: transparent; }
-.sse-viewer .sse-controlsWrap > .sse-buttonsContainer .sse-controlButton.sse-toggle:is(.sse-left, .sse-middle, .sse-right) { border-radius: 999px; }
+.sse-viewer .sse-controlsWrap > .sse-buttonsContainer .sse-controlButton.sse-toggle:is(.sse-left, .sse-middle, .sse-right) { border-radius: var(--ui-radius-md, 8px); }
 .sse-viewer .sse-controlsWrap > .sse-buttonsContainer .sse-controlButton.sse-active,
 .sse-viewer .sse-controlsWrap > .sse-buttonsContainer .legacy-camera.sse-active {
   color: var(--sse-text-light); background: var(--viewer-lavender); box-shadow: inset 0 0 0 1px var(--sse-accent);
@@ -68,13 +70,13 @@
 .sse-viewer .sse-controlsWrap > .sse-buttonsContainer :is(.sse-orbitCamera, .sse-flyCamera) > svg { margin: 0; width: 20px; height: 20px; }
 .sse-viewer .sse-orbitCamera::after { content: '环绕'; font-size: 12px; }
 .sse-viewer .sse-flyCamera::after { content: '飞行'; font-size: 12px; }
-.sse-viewer .sse-controlsWrap > .sse-buttonsContainer .legacy-camera { height: 34px; width: auto; padding: 0 10px; border-radius: 999px; font-family: inherit; }
+.sse-viewer .sse-controlsWrap > .sse-buttonsContainer .legacy-camera { height: 34px; width: auto; padding: 0 10px; border-radius: var(--ui-radius-md, 8px); font-family: inherit; }
 .sse-viewer .sse-controlsWrap > .sse-timelineContainer > .sse-line { border-color: var(--viewer-border); }
 .sse-viewer .sse-controlsWrap > .sse-timelineContainer > .sse-handle { border-color: var(--viewer-border); background: var(--sse-accent); }
-.sse-viewer .sse-controlsWrap > .sse-timelineContainer > .sse-time { background: var(--viewer-paper); border: 1px solid var(--viewer-border); border-radius: 8px; }
+.sse-viewer .sse-controlsWrap > .sse-timelineContainer > .sse-time { background: var(--viewer-paper); border: 1px solid var(--viewer-border); border-radius: var(--ui-radius-md, 8px); }
 .sse-viewer .sse-settingsPanel > .sse-settingsGroup > .sse-settingsRow > button,
 .sse-viewer .sse-xrModal > .sse-xrModalContent > .sse-xrModalButtons > button {
-  color: var(--sse-text-light); background: var(--sse-bkg); border: 2px solid var(--viewer-border); border-radius: 999px; font-family: inherit;
+  color: var(--sse-text-light); background: var(--sse-bkg); border: 1px solid var(--viewer-border); border-radius: var(--ui-radius-md, 8px); font-family: inherit;
 }
 .sse-viewer .sse-settingsPanel > .sse-settingsGroup > .sse-settingsRow > button:hover,
 .sse-viewer .sse-xrModal > .sse-xrModalContent > .sse-xrModalButtons > button:hover { background: var(--viewer-lavender); }
@@ -82,14 +84,14 @@
 .sse-viewer .sse-settingsPanel > .sse-settingsGroup > .sse-settingsRow > div.sse-toggleSwitch .sse-toggleTrack .sse-toggleThumb { background: var(--sse-bkg); }
 .sse-viewer .sse-settingsPanel > .sse-settingsGroup > .sse-settingsRow > div.sse-toggleSwitch.sse-active .sse-toggleTrack { background: var(--sse-accent); }
 .sse-viewer .sse-settingsPanel > .sse-settingsGroup > .sse-settingsRow > div.sse-toggleSwitch.sse-active .sse-toggleTrack .sse-toggleThumb { background: var(--sse-bkg); }
-.sse-viewer .sse-infoPanel > .sse-infoPanelContent > .sse-infoGpu { background: var(--sse-bkg-dark); border-radius: 10px; }
+.sse-viewer .sse-infoPanel > .sse-infoPanelContent > .sse-infoGpu { background: var(--sse-bkg-dark); border-radius: var(--ui-radius-md, 8px); }
 .sse-viewer .sse-infoPanel > .sse-infoPanelContent > .sse-infoLinks > .sse-infoLink:hover { background: var(--viewer-lavender); }
 .sse-viewer .sse-infoPanel h1::before { content: none; }
 .sse-viewer .sse-infoPanel, .sse-viewer .sse-xrModal { z-index: 3; }
 .sse-viewer .sse-loadingWrap > .sse-loadingText { font-family: var(--font-display, var(--viewer-font)); text-shadow: none; }
 .sse-viewer .sse-loadingWrap > .sse-loadingBar { border-radius: 999px; }
 .sse-viewer .sse-annotation { --sse-annotation-bkg: var(--viewer-paper); border-color: var(--viewer-border); }
-.sse-viewer .sse-annotationNav.sse-desktop { background: var(--viewer-paper); border: 2px solid var(--viewer-border); border-radius: 999px; }
+.sse-viewer .sse-annotationNav.sse-desktop { background: var(--viewer-paper); border: 1px solid var(--viewer-border); border-radius: var(--ui-radius-lg, 10px); }
 .sse-viewer .sse-annotationNav > button { background: var(--viewer-paper); }
 .sse-viewer .sse-annotationNav > button:hover, .sse-viewer .sse-annotationNav.sse-desktop > button:hover { background: var(--viewer-lavender); }
 @media (max-width: 640px) {

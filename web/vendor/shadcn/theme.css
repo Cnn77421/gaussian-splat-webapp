@@ -1,0 +1,67 @@
+/* shadcn/ui —— 主题 token 层（New York 样式 / neutral 基础色）
+ *
+ * 来源：https://ui.shadcn.com/docs/theming（快照见 registry/theming.md）
+ *       组件 class recipe 取自 registry/button.json、input.json、card.json、
+ *       dialog.json、badge.json、progress.json、separator.json、label.json
+ *       抓取日期与 SHA-256 见同目录 SOURCES.md。许可证 MIT。
+ *
+ * 适配说明（零构建前端）：
+ * 1. 官方 token 名（--background / --foreground / --primary / --accent / --border /
+ *    --muted / --radius …）与本项目既有的品牌变量重名且含义不同（尤其是
+ *    --accent：官方是 hover 面，这里是品牌主色），因此本层统一加 --ui- 前缀。
+ * 2. 官方主题还包含 chart-1…5、sidebar-* 与 .dark 暗色覆盖；当前界面没有图表、
+ *    侧栏与暗色模式，未收录，避免死配置。
+ * 3. 这里保留官方 neutral 取值；项目实际配色在 web/style.css 的 :root 里用品牌色
+ *    覆盖同名 token（改一处即可整体换色）。
+ * 4. 官方用 Tailwind 的 @theme inline 暴露 token；这里是等价的手写 CSS 刻度。
+ */
+
+:root {
+  /* 圆角刻度：官方 @theme inline 的推导公式 */
+  --ui-radius: 0.625rem;
+  --ui-radius-sm: calc(var(--ui-radius) * 0.6);
+  --ui-radius-md: calc(var(--ui-radius) * 0.8);
+  --ui-radius-lg: var(--ui-radius);
+  --ui-radius-xl: calc(var(--ui-radius) * 1.4);
+  --ui-radius-2xl: calc(var(--ui-radius) * 1.8);
+
+  /* 语义色（background/foreground 成对使用） */
+  --ui-background: oklch(1 0 0);
+  --ui-foreground: oklch(0.145 0 0);
+  --ui-card: oklch(1 0 0);
+  --ui-card-foreground: oklch(0.145 0 0);
+  --ui-popover: oklch(1 0 0);
+  --ui-popover-foreground: oklch(0.145 0 0);
+  --ui-primary: oklch(0.205 0 0);
+  --ui-primary-foreground: oklch(0.985 0 0);
+  --ui-secondary: oklch(0.97 0 0);
+  --ui-secondary-foreground: oklch(0.205 0 0);
+  --ui-muted: oklch(0.97 0 0);
+  --ui-muted-foreground: oklch(0.556 0 0);
+  --ui-accent: oklch(0.97 0 0);
+  --ui-accent-foreground: oklch(0.205 0 0);
+  --ui-destructive: oklch(0.577 0.245 27.325);
+  --ui-destructive-foreground: oklch(0.985 0 0);
+  --ui-border: oklch(0.922 0 0);
+  --ui-input: oklch(0.922 0 0);
+  --ui-ring: oklch(0.708 0 0);
+
+  /* 阴影刻度：Tailwind 默认的 shadow-xs/sm/md/lg */
+  --ui-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ui-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --ui-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ui-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* 动效：官方 transition-colors / transition-all 的 150ms cubic-bezier(.4,0,.2,1) */
+  --ui-transition-colors:
+    color .15s cubic-bezier(.4, 0, .2, 1),
+    background-color .15s cubic-bezier(.4, 0, .2, 1),
+    border-color .15s cubic-bezier(.4, 0, .2, 1),
+    text-decoration-color .15s cubic-bezier(.4, 0, .2, 1),
+    fill .15s cubic-bezier(.4, 0, .2, 1),
+    stroke .15s cubic-bezier(.4, 0, .2, 1);
+  --ui-transition-all: all .15s cubic-bezier(.4, 0, .2, 1);
+
+  /* 字体：官方默认字体栈里的等宽部分（本项目正文字体沿用自有品牌字体） */
+  --ui-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}

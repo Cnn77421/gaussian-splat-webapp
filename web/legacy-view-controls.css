@@ -1,40 +1,46 @@
+/* 原有视角面板：与 web/style.css 的组件层同刻度（圆角、边框、焦点环取自 --ui-* ）。 */
 .sse-viewer .legacy-surface { position: absolute; inset: 0; outline: none; touch-action: none; }
 .sse-viewer .legacy-camera { width: auto; padding: 0 10px; font: 12px var(--viewer-font, sans-serif); white-space: nowrap; }
 .sse-viewer .legacy-panel {
   position: absolute; top: 16px; right: 16px; width: min(350px, calc(100% - 32px));
-  border: 2px solid var(--viewer-border, #d6c6ad); border-radius: 18px 12px 17px 13px;
+  border: 1px solid var(--viewer-border, #d6c6ad); border-radius: var(--ui-radius-xl, 14px);
   background: var(--viewer-paper, #fffaf0f5); color: var(--sse-text, #5a4b49);
-  font: 12px/1.7 var(--viewer-font, sans-serif); box-shadow: var(--shadow, 0 3px 14px #63402f20);
+  font: 12px/1.7 var(--viewer-font, sans-serif); box-shadow: var(--ui-shadow-sm, 0 1px 3px #63402f1f);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   max-height: calc(100% - 140px); overflow-y: auto; touch-action: pan-y;
 }
 .sse-viewer .legacy-panel summary { padding: 10px 12px; cursor: pointer; color: var(--sse-text-light); }
 .sse-viewer .legacy-panel summary > span { font-family: var(--font-display, inherit); font-size: 15px; }
-.sse-viewer .legacy-panel[open] summary { border-bottom: 2px dashed var(--viewer-border); margin-bottom: 10px; }
+.sse-viewer .legacy-panel[open] summary { border-bottom: 1px solid var(--viewer-border); margin-bottom: 10px; }
 .sse-viewer .legacy-exit {
-  float: right; border: 1px solid var(--sse-accent); border-radius: 999px;
-  background: var(--viewer-lavender); color: var(--sse-text-light); font: inherit; padding: 1px 9px; cursor: pointer;
+  float: right; height: 1.5rem; padding: 0 10px; cursor: pointer; font: inherit;
+  border: 1px solid color-mix(in oklab, var(--ui-ring, #9178b0) 45%, transparent);
+  border-radius: var(--ui-radius-md, 8px); background: var(--viewer-lavender); color: var(--sse-text-light);
+  transition: var(--ui-transition-colors, background-color .15s);
 }
 .sse-viewer .legacy-exit:hover { background: var(--pink, #f1d8da); }
 .sse-viewer .legacy-panel-content { padding: 0 12px 12px; }
-.sse-viewer .legacy-panel p { margin: 10px 0 4px; padding-top: 10px; border-top: 1px dashed var(--viewer-border); color: var(--sse-text-dark); font-size: 11px; line-height: 1.9; }
+.sse-viewer .legacy-panel p { margin: 10px 0 4px; padding-top: 10px; border-top: 1px solid var(--viewer-border); color: var(--sse-text-dark); font-size: 11px; line-height: 1.9; }
 .sse-viewer .legacy-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
 .sse-viewer .legacy-presets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .sse-viewer .legacy-actions button {
-  border: 2px solid var(--viewer-border); border-radius: 999px; background: var(--sse-bkg); color: var(--sse-text);
-  font: inherit; padding: 4px 8px; cursor: pointer; transition: background .15s, border-color .15s;
+  height: 1.75rem; padding: 0 8px; cursor: pointer; font: inherit;
+  border: 1px solid var(--viewer-border); border-radius: var(--ui-radius-md, 8px);
+  background: var(--sse-bkg); color: var(--sse-text);
+  transition: var(--ui-transition-colors, background-color .15s, border-color .15s);
 }
 .sse-viewer .legacy-actions button:hover { background: var(--viewer-lavender); color: var(--sse-text-light); }
-.sse-viewer .legacy-actions button[aria-pressed="true"] { border-color: var(--sse-accent); background: var(--viewer-lavender); color: var(--sse-text-light); }
+.sse-viewer .legacy-actions button[aria-pressed="true"] { border-color: var(--ui-ring, #9178b0); background: var(--viewer-lavender); color: var(--sse-text-light); }
 .sse-viewer .legacy-status { display: block; color: var(--sse-accent); font-size: 11px; }
-.sse-viewer .legacy-status:not(:empty) { margin-top: 8px; padding: 5px 8px; background: var(--viewer-lavender); border-radius: 8px; }
+.sse-viewer .legacy-status:not(:empty) { margin-top: 8px; padding: 5px 8px; background: var(--viewer-lavender); border-radius: var(--ui-radius-md, 8px); }
 .sse-viewer .legacy-options { display: flex; flex-direction: column; gap: 5px; margin: 8px 0; }
 .sse-viewer .legacy-options label { cursor: pointer; }
 .sse-viewer .legacy-options input { accent-color: var(--sse-accent); vertical-align: middle; }
 .sse-viewer .legacy-info {
-  position: absolute; left: 16px; top: 16px; max-width: calc(100% - 32px); border: 2px solid var(--viewer-border);
-  border-radius: 14px 10px 13px 9px; background: var(--viewer-paper); color: var(--sse-text); padding: 10px;
-  box-shadow: var(--shadow); white-space: pre-wrap; font: 11px/1.7 monospace; pointer-events: none;
+  position: absolute; left: 16px; top: 16px; max-width: calc(100% - 32px);
+  border: 1px solid var(--viewer-border); border-radius: var(--ui-radius-lg, 10px);
+  background: var(--viewer-paper); color: var(--sse-text); padding: 10px;
+  box-shadow: var(--ui-shadow-sm); white-space: pre-wrap; font: 11px/1.7 var(--ui-font-mono, monospace); pointer-events: none;
 }
 .sse-viewer.legacy-active .sse-controlsHint { display: none; }
 @media (max-width: 640px) {
